@@ -2,7 +2,13 @@
 
 **Hand-off document for designing the peptriva website.**
 
-This is the single source of truth. It consolidates the original product requirements, brand identity, content strategy, page-by-page direction, compliance constraints, and acceptance criteria. You should be able to design and build the site from this document alone.
+This is the single source of truth. It defines:
+- **What** the site must do (functional + business + compliance requirements)
+- **Brand** (logo, colors, type, voice — non-negotiable)
+- **Reference sites** the designer should pull design language from
+- **Three specific page designs** (research, protocols, COA library) where the direction is fixed because the previous prototype already nailed them
+
+For every other page, **the designer has full control over layout, structure, and visual treatment**, provided brand and compliance rules hold. Design freely; reference the inspiration sites; build something better than the v1 prototype.
 
 ---
 
@@ -12,10 +18,13 @@ This is the single source of truth. It consolidates the original product require
 2. [Business model & legal posture](#2--business-model--legal-posture)
 3. [Audience](#3--audience)
 4. [Brand identity](#4--brand-identity)
-5. [Visual & UX rules](#5--visual--ux-rules)
-6. [Reference sites (inspiration)](#6--reference-sites-inspiration)
-7. [Sitemap](#7--sitemap)
-8. [Page-by-page direction](#8--page-by-page-direction)
+5. [Reference sites — design direction](#5--reference-sites--design-direction)
+6. [Sitemap](#6--sitemap)
+7. [Three locked page designs](#7--three-locked-page-designs)
+   - [Research library (`/research`, `/research/[peptide]`)](#71-research-library-research-researchpeptide)
+   - [Protocols (`/protocols`, `/protocols/[slug]`, `/protocols/[slug]/subscribe`)](#72-protocols-protocols-protocolsslug-protocolsslugsubscribe)
+   - [COA library (`/coa`)](#73-coa-library-coa)
+8. [Open pages — functional requirements only](#8--open-pages--functional-requirements-only)
 9. [Membership — the strategic core](#9--membership--the-strategic-core)
 10. [Subscription / protocol model](#10--subscription--protocol-model)
 11. [AI research assistant](#11--ai-research-assistant)
@@ -36,15 +45,15 @@ This is the single source of truth. It consolidates the original product require
 ## 2 · Business model & legal posture
 
 ### Today: Option 2 — Research Use Only (RUO)
-- Sell research peptides directly to researchers/labs/institutions.
-- Strict RUO compliance: no human-use, no medical, no therapeutic, no clinical-outcome language on any product, shop, quiz, protocol, or membership page.
-- Clinical literature is allowed **only** on `/blog or /research protocol` with an educational disclaimer.
-- 21+ age gate at the door, persistent.
-- AI evaluation of user goals → peptide-category recommendations only (legality-safe).
+- Sell research peptides directly to researchers/labs/institutions
+- Strict RUO compliance: no human-use, no medical, no therapeutic, no clinical-outcome language on any **product, shop, quiz, or membership** page
+- Clinical literature is permitted on **`/blog`, `/research`, and `/protocols`** pages (with an educational disclaimer pinned). Everywhere else it is forbidden.
+- 21+ age gate at the door, persistent
+- AI evaluation of user goals → peptide-category recommendations only (legality-safe)
 
 ### Tomorrow: Option 1 — Telehealth-prescribed
-- When peptides become legally prescribable, pivot the same brand & infrastructure to a telehealth model where physicians prescribe peptides, AI recommends protocols.
-- Same brand, same logo, same colors — design must extend to medical/telehealth without rebrand.
+- When peptides become legally prescribable, pivot the same brand & infrastructure to a telehealth model where physicians prescribe peptides, AI recommends protocols
+- Same brand, same logo, same colors — design must extend to medical/telehealth without rebrand
 
 ### Strategic priority: recurring revenue
 The membership and protocol-tied subscriptions are the long game. The single most important conversion event on the site is **membership signup**, and the second most important is **protocol-tied subscription**. Single-purchase orders are a fallback path, not the goal.
@@ -60,7 +69,7 @@ The membership and protocol-tied subscriptions are the long game. The single mos
 - Skeptical of wellness marketing — respond to chemistry, methodology, transparency
 
 ### Secondary
-- Institutional buyers (universities, biotech, contract research orgs) — secondary funnel via `/contact` and institution-specific pricing
+- Institutional buyers (universities, biotech, contract research orgs) — secondary funnel via `/contact`
 
 ### Voice signals to nail
 - "Characterized" not "high quality"
@@ -73,6 +82,8 @@ The membership and protocol-tied subscriptions are the long game. The single mos
 
 ## 4 · Brand identity
 
+These are non-negotiable. Designer must respect every rule in this section.
+
 ### Name
 **peptriva** — lowercase, always.
 
@@ -84,7 +95,7 @@ The membership and protocol-tied subscriptions are the long game. The single mos
 - Never rendered with effects, never colored — it's monochrome black or white
 - Provided asset has a black background that should be removed; redraw if needed for a true SVG transparent version
 
-### Colors (the entire palette — use these tokens)
+### Colors
 
 | Token | Hex | Use |
 |---|---|---|
@@ -102,130 +113,97 @@ The membership and protocol-tied subscriptions are the long game. The single mos
 - Display: **Inter Tight** (or geometric-sans equivalent), 700–800 weight, tight tracking
 - Body: **Inter** 400/500
 - Lowercase brand voice for headings; sentence case for body
-- Generous size jumps (display 48–96px desktop, body 15–17px)
+
+### Hard rules
+- **No gradients anywhere.** Solid color blocks, hairline strokes, monochrome illustrations only.
+- Light mode is primary. Dark sections are accent only.
+- One accent color per section, max two per page.
+- Mostly white background.
 
 ### Brand visual identity: peptide structure illustrations
-This is the differentiator. **Do not skip this.** Every peptide on the site has its own deterministic structure illustration generated from its amino-acid sequence — so every product page, research page, and COA modal has a unique scientific visual that represents the actual molecule.
+This is the differentiator. Every peptide on the site has its own deterministic structure illustration generated from its amino-acid sequence — so every product page, research page, and COA modal has a unique scientific visual that represents the actual molecule.
 
 - 2D backbone-and-residue ribbon: alpha-carbon zigzag with side-chain spheres
 - Residues colored by class, rotated through brand colors (Blurple / Cyan / Magenta / Sunset / Yellow on Midnight or White)
-- Solid colors only — **never gradient strokes or fills**
+- Solid colors only — never gradient strokes or fills
 - Slow draw-in animation on mount (~2–3 seconds), then idle subtle motion
 - Respect `prefers-reduced-motion`
 
-These illustrations appear on:
-- Hero of each `/research/[peptide]` education page
-- COA library row-click modal
-- Featured-product spots on the home page
-- Optionally as decorative dividers (still solid colors, no gradients)
+These illustrations must appear on the three locked pages (research, protocols, COA modal). Whether they appear elsewhere is the designer's call.
 
 ---
 
-## 5 · Visual & UX rules
+## 5 · Reference sites — design direction
 
-### Hard rules
-- **No gradients.** Solid color blocks, hairline strokes, monochrome illustrations.
-- Light mode is primary. Dark sections are accent only (e.g., quality hero, membership upsell band).
-- Mostly white background
+For every page that isn't one of the three locked designs in section 7, the designer should pull layout, rhythm, motion, and component language from these references. The site's overall aesthetic should feel like a member of this set.
 
-### Editorial / scientific feel
-- Closer to *elevenlabs.io*, *seed.com*, *sapgoodenergy.com* than *gnc.com*.
-- Generous whitespace; section padding ~96–128px desktop, 64–80px mobile.
-- Hairline 1px dividers instead of background-color section changes where possible.
-- Display weight for headlines, generous size jumps.
-- Cards: white, 1px Slate border, optional soft shadow on hover. No gradient borders.
-- Buttons: pill-shape, Midnight primary, hairline outline secondary, no gradient fills. Hover = darken.
-- Iconography: line-weight icons (Lucide style), Midnight or Slate, never multi-colored.
+> **superpower.com is the most important reference.** Use it as the primary structural template for the home page, the membership conversion flow, and the overall site rhythm. Match its single-tier conviction, its perk presentation, its math/value-prop modules, and its quiet conversion focus. The peptriva site should feel like a member of the same family as superpower.com — applied to peptide research instead of preventive medicine.
 
-### Animation
-- Subtle fade/slide (200–300ms), no parallax.
-- Peptide structures animate in over ~2–3s on viewport entry, then idle drift.
-- Respect `prefers-reduced-motion` everywhere.
-
----
-
-## 6 · Reference sites (inspiration)
-
-| Site | Use as reference for |
+| Reference | Pull from it |
 |---|---|
-https://superpower.com/ for design and fee very important
-| [elevenlabs.io](https://elevenlabs.io) | Overall aesthetic for product category and research pages — dark/light contrast, type rhythm, scientific minimalism |
-| [sapgoodenergy.com/products/case-with-10-sap](https://sapgoodenergy.com) | Three-column product page, sub-vs-once selector, dotted-divider value props |
-| [superpower.com](https://superpower.com) | Membership UX, perk presentation, single-tier conviction |
-| [ezpeps.com/coa-library](https://ezpeps.com/coa-library) | COA library table format (we'll add a row-click modal on top) |
+| **[superpower.com](https://superpower.com)** | **Primary reference.** Homepage structure (replace the wellness content with peptide-research equivalents — research, category, membership), membership UX, perk presentation, single-tier conviction, premium feel, conversion-page rhythm. The peptriva home page should structurally mirror superpower.com's home page. |
+| **[elevenlabs.io](https://elevenlabs.io)** | Aesthetic reference for `/shop`, `/shop/[peptide]`, and `/research` family pages — type rhythm, scientific minimalism, dark/light contrast, hero treatments, navigation simplicity. |
+| **[seed.com/daily-multivitamin](https://seed.com/daily-multivitamin)** | Long-form education-style page format. Already locked for `/research/[peptide]` (see 7.1) — but its rhythm is also a template for any other long-form page. |
+| **[sapgoodenergy.com/products/case-with-10-sap](https://sapgoodenergy.com/products/case-with-10-sap)** | Product page reference — three-column layout, sub-vs-once selector, dotted-divider value props, big outline display headline, sticky purchase rail. Use as the primary reference for `/shop/[peptide]`. |
+| **[ezpeps.com/coa-library](https://ezpeps.com/coa-library)** | COA library table format. Already locked for `/coa` (see 7.3) but useful for understanding what researchers expect from a COA archive. |
+| **[stripe.com](https://stripe.com)** | Editorial-scientific developer/research voice. Use for tone calibration on About, Quality, FAQ. |
+
+The designer is free to pull from other sites where appropriate. The references above are the floor, not the ceiling.
 
 ---
 
-## 7 · Sitemap
+## 6 · Sitemap
 
 ```
 /                               Marketing landing
-                                **reference https://superpower.com/ homepage - replace with peptide specific answers research, category page, membership etc.
+                                Reference: superpower.com homepage —
+                                replace wellness content with peptide-specific
+                                equivalents (research, category, membership).
 
 /quiz                           Standalone quiz funnel → membership
-/quiz/results                   Saved share-able results page (with /quiz/results/[id] for emailed links)
+/quiz/results                   Saved share-able results page
+/quiz/results/[id]              Per-share-link results
 
-/research                       Research library index (browse by class)
-/research/[peptide]             Education-only deep-dive (long-form, scientific)
+/research                       Research library index — LOCKED design (7.1)
+/research/[peptide]             Per-peptide deep dive — LOCKED design (7.1)
 
-/shop                           Catalog (filterable, ecom-style cards with vial mockups)
-/shop/[peptide]                 Ecom product detail (vial mockup hero, sticky buy rail, sub-vs-once)
+/shop                           Catalog
+/shop/[peptide]                 Product detail (vial-mockup ecom)
 
-/protocols                      Curated stacks index
-/protocols/[slug]               Stack detail
+/protocols                      Stacks index — LOCKED design (7.2)
+/protocols/[slug]               Stack detail — LOCKED design (7.2)
 /protocols/[slug]/subscribe     Protocol-tied subscription configurator
 
 /membership                     Single-tier membership landing
 /membership/welcome             Post-signup onboarding
 
-/coa                            COA library — table with row-click modal
-/quality                        Deep quality / safety / methods page (12 sections)
-/about                          Brand story, principles, transparency commitments
-/blog                           Educational research blog (clinical lit allowed here only)
+/coa                            COA library — LOCKED design (7.3)
+
+/quality                        Deep quality / safety / methods page
+/about                          Brand story, principles, transparency
+/blog                           Educational research blog
 /blog/[slug]                    Article
 
 /account                        Member dashboard
-  /account/protocols            Active protocol subscriptions + progress tracking
+  /account/protocols            Active protocol subscriptions + tracking
   /account/orders               Order history
-  /account/coas                 Saved COA archive (forever-searchable)
+  /account/coas                 Saved COA archive
   /account/journal              Per-protocol research notes
   /account/billing              Membership + payment
 
 /login, /signup
 /checkout, /checkout/success
-
 /legal/research-use, /legal/terms, /legal/privacy
 /contact, /faq
 ```
 
 ---
 
-## 8 · Page-by-page direction
+## 7 · Three locked page designs
 
+These three page families are locked. The previous prototype got their direction right and the design should preserve the structure described here. The designer can refine the visual treatment within brand rules but should not restructure these pages.
 
-
-### 8.2 Quiz (`/quiz`)
-
-Standalone marketing landing page optimized for membership conversion. **The single most important page on the site for funnel performance.**
-
-Structure:
-1. **Hero** — single bold question: "What does your research need?" + Start CTA. Solid color block, single accent line, no gradients.
-2. **Quiz flow** — full-screen question-by-question UX (one question per "screen"), animated transitions, big tap-targets, progress dots. ~5–7 questions:
-   - Research category interest (multi-select)
-   - Typical sequence length you study
-   - Required characterization on COA (multi-select)
-   - Research cadence (one-off study / quarterly / continuous program)
-   - Have you bought research peptides before?
-   - How important is dosing/protocol guidance to your work?
-3. **Mid-quiz nudges** — small "did you know?" cards between questions reinforcing peptriva differentiators (per-batch COA, no bundling, etc.)
-4. **Results screen** — three sections, in this order:
-   1. **Recommended research category** with the 2–3 top peptides for that category (links to `/research/[peptide]` for education)
-   2. **Recommended protocol/stack** — the named protocol that fits their answers, with a "Subscribe to this protocol" CTA
-   3. **Membership upsell** — full-width section explaining why their answers point to the membership being a fit. Includes a one-click "Start my membership" button. Soft, not pushy — emphasize the math (free shipping + member discount + dosing app + …) over the next 6 months if they actually run the protocol they were just recommended.
-5. **Email capture** as a soft option below the results: "Save these recommendations to your inbox" (single-field).
-6. **No human-use claims anywhere** — all results phrased as research-category and research-protocol recommendations, not personal-outcome promises. The standard quiz disclaimer remains.
-
-### 8.3 Research library (`/research` and `/research/[peptide]`)
+### 7.1 Research library (`/research`, `/research/[peptide]`)
 
 Pure educational content. No add-to-cart hero. This is the resource library a researcher reads to learn about a peptide before deciding whether to buy.
 
@@ -233,76 +211,39 @@ Pure educational content. No add-to-cart hero. This is the resource library a re
 - Browse-by-class layout
 - Each card: peptide name, class, one-line description, link to `/research/[peptide]`
 - No prices, no buy buttons, no urgency
+- Solid color cards, no gradients
 
 #### `/research/[peptide]` — single peptide deep-dive
-Long-form, editorial, ~10-section scroll:
-- **Hero** — peptide name, class chip, sequence preview, **animated structure visualization in solid brand colors** (specific to that peptide's sequence)
+
+Long-form, editorial, single-page scroll with anchor-navigable sections (seed.com/daily-multivitamin pattern):
+
+- **Hero** — peptide name, class chip, sequence preview, **animated structure visualization in solid brand colors specific to that peptide's sequence**
 - **Discovery & history** — when, who, what was the parent molecule
 - **Mechanism of action (as published)** — receptor targets, signaling pathways, cellular effects per published research
-- **Structure deep-dive** — residue chips, MW, pI, modifications
+- **Structure deep-dive** — residue chips, MW, pI, modifications, characterization data
 - **Characterization standards** — what HPLC purity, MS identity, etc. typically look like for this molecule
 - **Storage & handling guide**
-- **Related peer-reviewed literature** — with educational disclaimer per blog rules
+- **Related peer-reviewed literature** — clinical literature is permitted here (with educational disclaimer)
 - **Reading time** displayed at top
 - **Related research** — cross-link to other `/research` entries in the same class at the bottom
 - **"Ready to research?"** — single small button at the bottom that links to the corresponding `/shop/[peptide]` product page (no upsell pressure, just a clean handoff)
 
-This is the long-form, seed.com-style page the v1 prototype called "Design A". It belongs HERE, not on product pages.
+The animations and illustrations on these pages must be of the **actual structure of that specific peptide**, not generic brand decoration.
 
-### 8.4 Shop (`/shop` and `/shop/[peptide]`)
+### 7.2 Protocols (`/protocols`, `/protocols/[slug]`, `/protocols/[slug]/subscribe`)
 
-Proper ecom — closer to **sapgoodenergy.com**, **athleticgreens.com**, or **seed.com** product pages, but for research vials.
-
-#### `/shop` — catalog
-- Filterable grid by research category, sequence length, format (vial mg)
-- Each card shows: vial mockup, name, class, price, "subscribe & save" indicator
-- Sort by: featured, alphabetical, price low→high, recently restocked
-- Top of grid: short editorial intro for the category (2 sentences)
-- No bundling promos anywhere
-
-#### `/shop/[peptide]` — product detail
-
-**Visual:**
-- **Peptide vial mockup** — photorealistic 3D render or photographic style, neutral background. Vial label shows peptide name, batch number, mg, and peptriva logo. The abstract structure illustration moves to a secondary "About this molecule" tab/section that links out to the matching `/research/[peptide]` page.
-- Multiple angles in a small gallery: front, top-down with cap removed, label close-up
-- Subtle drop shadow, white background, no gradients
-
-**Layout:**
-- **Left column**: vial gallery
-- **Right column** (sticky on desktop):
-  - Class chip + RUO chip
-  - Product name (display weight)
-  - One-line research-context description
-  - Star rating + count
-  - **Variant selector** (vial mg, e.g. 5 mg / 10 mg)
-  - **Pack size selector** (1 / 3 / 6 vials with per-vial pricing visible)
-  - **Subscribe vs One-time** as the primary purchase decision (subscribe is the default highlighted option)
-  - If subscribed → **Protocol-aware cadence** (see section 10)
-  - "Add to research order" button (Midnight, full-width)
-  - Promo strip below: "Members save 15% + free shipping"
-- **Below the fold** (one continuous scroll, anchor-navigable):
-  - Specs strip (HPLC %, sterility, endotoxin, mg/vial)
-  - "About this molecule" — short summary with a link to the full `/research/[peptide]` page
-  - Current batch COA card (with the deep COA modal — see 8.7)
-  - Storage & handling
-  - FAQ specific to this product
-  - Cross-sell: stacks this peptide is part of (linked to `/protocols/[slug]`)
-- **Sticky bottom buy bar** appears after scrolling past the hero
-
-### 8.5 Protocols (`/protocols`, `/protocols/[slug]`, `/protocols/[slug]/subscribe`)
-
-Curated stacks for research goals. Each protocol is its own product, with its own subscription cadence and tracking.
+Curated stacks for research goals. Each protocol is its own product with its own subscription cadence and tracking.
 
 #### `/protocols` — index
 - Card grid by category
-- Each card: protocol name, category, included peptides (each as a small chip with its vial mockup), recommended cycle length
+- Each card: protocol name, category, included peptides (each as a small chip with its peptide-structure thumbnail), recommended cycle length
 
 #### `/protocols/[slug]` — protocol detail
 - Hero: name, category, short research-context description
 - Components — each peptide in the stack as a card with name, class, mg/vial, structure illustration
 - Recommended cycle: weekly schedule, total cycle length
 - "Subscribe to this protocol" CTA → `/protocols/[slug]/subscribe`
-- Rationale section explaining why this combination is studied together in research models (NO outcome claims)
+- Rationale section explaining why this combination is studied together in research models — clinical literature is permitted here with educational disclaimer, but no outcome claims about the buyer
 - Component COAs surfaced
 
 #### `/protocols/[slug]/subscribe` — configurator
@@ -312,13 +253,13 @@ Curated stacks for research goals. Each protocol is its own product, with its ow
 - Member vs non-member pricing comparison shown clearly
 - One-click "subscribe and start" CTA
 
-### 8.6 COA library (`/coa`)
+### 7.3 COA library (`/coa`)
 
-A public, searchable index of every batch peptriva has ever shipped. **The most important trust element on the site.** Search by batch number, filter by product.
+A public, searchable index of every batch peptriva has ever shipped. **The most important trust element on the site.** Search by batch number, filter by product. Table format inspired by ezpeps.com/coa-library.
 
 **Each row is clickable → opens a large centered modal:**
 
-- **Animated peptide-structure visualization** of that specific peptide, rendered in brand colors (no gradients) — sequence-driven, slow draw-in animation, ~3 seconds, then idle subtle motion
+- **Animated peptide-structure visualization** of that specific peptide, rendered in solid brand colors (no gradients) — sequence-driven, slow draw-in animation, ~3 seconds, then idle subtle motion
 - Peptide quick-facts: name, class, sequence, MW, pI, vial size, storage
 - COA testing section:
   - Batch number, manufacture date, expiry
@@ -331,60 +272,77 @@ A public, searchable index of every batch peptriva has ever shipped. **The most 
 - Close on overlay click, ESC, or X button
 - Modal animates in (fade + scale-from-95%); peptide structure animation begins immediately on open
 
-### 8.7 Quality (`/quality`)
+---
 
-The trust deep-dive. **Twelve concrete sections** — each must contain real numbers and real methodology, not generic blurbs.
+## 8 · Open pages — functional requirements only
 
-1. **Hero** — "Characterized before it ships" (solid Midnight section with a single Cyan accent line, no gradient).
-2. **Manufacturing facility** — FDA-regulated compounding pharmacy partnership, ISO classification, environmental monitoring, chain-of-custody from API to filled vial. Photos of the facility.
-3. **Sterility & sterilization** — USP <797> compliance details, terminal filtration vs aseptic fill, sterility-test methodology, growth-medium controls, hold times.
-4. **Identity & purity testing** — Reverse-phase HPLC (gradient, column, detection wavelength), ESI-MS with monoisotopic-mass tolerance, MS/MS for sequence confirmation when warranted.
-5. **Endotoxin testing** — LAL or rFC assay, EU/mg specification ladder, sensitivity limits.
-6. **Heavy-metal & residual-solvent testing** — ICP-MS panel for heavy metals, GC-MS for residual solvents from synthesis.
-7. **Stability program** — Real-time + accelerated stability, lyophilized vs reconstituted, expiry-setting methodology.
-8. **Cold chain & shipping** — Insulated packaging spec, temperature loggers for sensitive batches, transit-time monitoring.
-9. **Recall & batch-failure protocol** — What happens if a batch fails any spec (destroyed, never reworked, never sold). Notification flow to anyone who received product from a recalled lot.
-10. **Independent third-party verification** — Optional independent-lab re-testing on request for institutional buyers.
-11. **Documentation philosophy** — Why we publish the COA *before* the product ships, not after.
-12. **Researcher safety guidance** — Sterile reconstitution technique, PPE recommendations, biohazard handling for any disposed material. Frame as research-lab safety, not user safety.
+For everything below, **the designer has full creative control over layout, visual treatment, and component choices**. Listed here are only the *requirements* — what each page must do, what data it must surface, what conversions it must drive. How that's expressed visually is the designer's call, informed by the references in section 5.
 
-### 8.8 About (`/about`)
+### 8.1 Home (`/`)
+- Functions as a funnel router, primarily driving traffic to `/quiz` (membership conversion path) and secondarily to `/shop` and `/membership`
+- Must communicate brand identity and the three differentiators: per-batch COAs, no bundling, characterized in FDA-regulated facility
+- Must surface featured stacks and a membership teaser
+- Must include the RUO banner and respect the 21+ gate
+- **Primary structural reference: superpower.com homepage.** Mirror its rhythm, section pacing, and conversion focus — but replace the wellness content with peptide-research equivalents (research library, category browsing, membership).
 
-- Hero — origin story + transparency manifesto
-- Three principles cards (transparent characterization / no bundling / strictly research use)
-- Team blurb (placeholder for now)
-- Visual: split with facility/lab photo
-- Closing CTA → `/quality` and `/membership`
+### 8.2 Quiz (`/quiz`, `/quiz/results`)
+- Standalone marketing landing page optimized for membership conversion
+- 5–7 question flow covering: research category interest, sequence length preference, required characterization, research cadence, prior peptide experience, importance of dosing/protocol guidance
+- Results screen must surface: recommended research category (with peptides), recommended protocol/stack (with subscribe CTA), and a membership upsell section explaining why their answers map to membership value
+- Optional email capture below results
+- Standard quiz disclaimer: "informational only — not human-use guidance"
+- All results phrased as research-category recommendations, never personal-outcome promises
+- Designer's call on UX paradigm: full-screen-per-question vs single-page vs progressive disclosure
+- Reference: any high-conversion quiz funnel (typeform, ramp, superhuman); designer's call
 
-### 8.9 Blog (`/blog` and `/blog/[slug]`)
+### 8.3 Shop (`/shop`, `/shop/[peptide]`)
+- Catalog page with filterable grid (by research category, sequence length, format)
+- Each product card surfaces: name, class, price, subscribe-and-save indicator
+- Product detail must surface: photorealistic vial mockup, variant selector (mg), pack size selector, subscribe-vs-once selector (subscribe is the highlighted default), member-pricing strip, current-batch COA reference, FAQ, related stacks, link to corresponding `/research/[peptide]` for deeper science
+- Subscribe selection should expose the protocol-tied cadence options (see section 10)
+- References: sapgoodenergy.com/products/case-with-10-sap for product detail, elevenlabs.io for catalog aesthetic; designer's call on cards
 
-The **only** place clinical literature can be referenced. Every article carries an "Educational content — not product guidance" callout.
+### 8.4 Membership (`/membership`, `/membership/welcome`)
+- Single-tier presentation only — never multi-tier
+- Must list and explain all 15 perks from section 9
+- 14-day free trial offered for first-time members
+- Cancel-anytime, no contract, no fee — clearly communicated
+- Math/savings calculator for the value proposition
+- Member testimonials (research-context, RUO-safe)
+- Sticky CTA to start membership
+- **Primary reference: superpower.com.** Match its single-tier conviction, perk presentation, and conversion rhythm.
 
-#### `/blog` — index
-- 3-column grid of articles
-- Tags as small chips (Characterization, Storage, Cellular biology, etc.)
-- Reading time per card
+### 8.5 Quality (`/quality`)
+- Trust deep-dive that documents methodology and safety
+- Must cover concrete methodology in these areas (designer chooses how to organize):
+  - Manufacturing facility (FDA-regulated, ISO classification, environmental monitoring)
+  - Sterility & sterilization (USP <797>, sterile fill, sterility-test methodology)
+  - Identity & purity testing (RP-HPLC parameters, ESI-MS tolerance, MS/MS where used)
+  - Endotoxin testing (LAL or rFC, EU/mg specs)
+  - Heavy-metal & residual-solvent panels (ICP-MS, GC-MS)
+  - Stability program (real-time + accelerated, lyophilized vs reconstituted)
+  - Cold chain & shipping (insulated packaging, temperature loggers)
+  - Recall & batch-failure protocol (destroy-not-rework policy)
+  - Independent third-party verification offering
+  - Documentation philosophy (publish COA before ship)
+  - Researcher safety guidance (sterile reconstitution, PPE, biohazard handling)
+- Each section should contain real numbers / methods, not generic blurbs
+- Reference: stripe.com voice; designer's call on visual treatment
 
-#### `/blog/[slug]` — article
-- Centered prose layout, ~3-column max width
-- Hero image
-- "Educational content — not product guidance" pinned callout
-- Bibliography at the bottom
+### 8.6 Account dashboard (`/account` + sub-routes)
+- Must surface: next shipment date/contents, active protocol subscriptions with progress bars, saved COAs (forever-searchable), per-protocol journal entries, order history, billing
+- Each protocol subscription must show: where the user is in the protocol (week N of M), what's in the next shipment, cadence/pause/cancel controls
+- COA archive must persist across cancellation for 12 months
+- Reference: linear.app, ramp, superhuman for dashboard density and clarity; designer's call
 
-### 8.10 Account dashboard (`/account` + sub-routes)
-
-Logged-in member home. **The product experience that justifies the membership price.**
-
-- `/account` — overview cards: next shipment, active protocol(s), saved COAs count, journal entries
-- `/account/protocols` — list of active protocol subscriptions, each with:
-  - Progress bar (week 3 of 8)
-  - What's in the next shipment, when it ships
-  - Cadence/pause/cancel controls
-  - Per-protocol journal entries
-- `/account/orders` — full order history
-- `/account/coas` — searchable archive of every COA the member has received, plus saved-from-public-library COAs
-- `/account/journal` — protocol-scoped research notes the member has added per shipment
-- `/account/billing` — membership status, payment method, invoices
+### 8.7 About, Blog, FAQ, Contact, Legal, Login/Signup, Checkout
+- About: brand origin, transparency principles, team
+- Blog: educational research articles; clinical literature is allowed here (with educational-only disclaimer pinned)
+- FAQ, Contact: standard form
+- Legal: terms, privacy, research-use policy
+- Login/Signup: standard, with the 21+ verification on signup
+- Checkout: cart → review → payment → success
+- Designer's call on all of these
 
 ---
 
@@ -398,7 +356,7 @@ Logged-in member home. **The product experience that justifies the membership pr
 - 14-day free trial for first-time members
 - Cancel anytime, no contract, no fee
 
-### The 15 perks
+### The 15 perks (all must be communicated on `/membership`)
 
 1. **Free shipping** on every order — standard insulated cold-chain
 2. **Member pricing** — 15% off every research order, every time
@@ -416,16 +374,6 @@ Logged-in member home. **The product experience that justifies the membership pr
 14. **Pause anytime** — up to 90 days, subscription resumes automatically
 15. **Beta access** — early invite to new tools (sequence calculator, BBB-permeability predictor, characterization-request portal)
 
-### Membership page structure
-
-- **Hero** — single number ($49/month), one-line value prop, "Start membership" button. Solid Midnight section, single accent line.
-- **Why members join** — three big icons: protocols / dosing-app / saved-COAs. Short copy under each.
-- **Everything included** — full perk grid, two columns, subtle dividers.
-- **The math** — short calculator: "If you run two protocol subscriptions per quarter you save ~$XYZ in shipping + member discount alone."
-- **What members say** — testimonials (research-context, RUO-safe).
-- **FAQ** — pause/cancel, refunds, when COA archive expires, etc.
-- **Sticky CTA** at bottom: "Start your peptriva membership" (Midnight button, no gradient).
-
 ### Anti-patterns to avoid
 - No multi-tier complexity (Researcher / Lab / Institution from v1 was wrong — kill it)
 - No retention dark patterns on cancel
@@ -438,7 +386,7 @@ Logged-in member home. **The product experience that justifies the membership pr
 
 The strategic pivot from generic "subscribe to BPC-157 monthly" to **protocol-tied subscriptions**.
 
-Subscriptions aren't just generic recurring orders — each one is tied to a **named protocol** with its own dosing schedule, cadence, and tracking.
+Subscriptions aren't generic recurring orders — each one is tied to a **named protocol** with its own dosing schedule, cadence, and tracking.
 
 ### Examples (all RUO research-context — never human-use language)
 - *Tissue Recovery Stack* — BPC-157 + TB-500, 8-week research protocol, monthly auto-ship of two vials
@@ -449,15 +397,10 @@ Subscriptions aren't just generic recurring orders — each one is tied to a **n
 ### Each protocol subscription has
 - A unique slug & landing page (`/protocols/[slug]/subscribe`)
 - Recommended cadence (weekly/biweekly/monthly), total cycle length, what the next shipment will contain
-- Member dashboard tracking:
-  - Where the user is in the protocol (week 3 of 8)
-  - What's in the next shipment, when it ships
-  - All COAs from past shipments aggregated
-  - Notes / journal entries the researcher can add per shipment
-  - Pause / change cadence / cancel buttons
+- Member dashboard tracking: where the user is, next-shipment contents, all past COAs, journal entries, pause/cadence/cancel controls
 - Each protocol is a **distinct subscription product** — no generic "subscribe to X every month" option. Members must subscribe to a named protocol; one-time orders are available outside subscriptions.
 
-This is the wedge for the membership tier.
+This is the wedge for the membership.
 
 ---
 
@@ -483,12 +426,14 @@ A chat experience available throughout the site. Not a coach, not a doctor, not 
 - **Public**: limited chat, ~5 messages per session, no document upload, capped context
 - **Members**: full chat, document upload (drop a paper, ask questions), longer context window, persistent thread history, faster model
 
-### UX
-- Sparkle-icon button in header → opens right-side sheet
-- Disclaimer banner at top of every conversation
+### Behavior requirements
+- Disclaimer banner pinned to every conversation
 - Suggested questions on first open
 - Streaming responses
 - Cite sources where applicable; never invent citations
+- Refuses (politely, with redirection) any forbidden-scope question
+
+UI placement and conversation paradigm is the designer's call.
 
 ---
 
@@ -521,7 +466,7 @@ Initial catalog of ~30 research peptides across 9 classes. Each peptide needs:
 - linked protocol(s)
 - linked education article reference
 
-A complete chemistry reference for each is in `docs/peptide-reference.md`.
+A complete chemistry reference for every peptide is in `docs/peptide-reference.md` of this repo.
 
 ---
 
@@ -530,27 +475,35 @@ A complete chemistry reference for each is in `docs/peptide-reference.md`.
 Every one of these is a **must-have** for launch. Many are RUO compliance requirements; cutting any opens legal/regulatory exposure.
 
 ### Hard requirements
-- **21+ age gate** at first visit, cookie-persisted, with the two checkboxes:
+- **21+ age gate** at first visit, cookie-persisted, with two checkboxes:
   - "I am 21 or older and conducting bona-fide research."
   - "I understand these products are research use only and not for human or veterinary use."
 - **RUO banner** on every page (slim, top of header, low-contrast): *"For research use only. Not for human consumption."*
-- **No human-use language** anywhere in product, shop, protocol, quiz, or membership pages.
-- **Generic peptide names only**: semaglutide, tirzepatide, liraglutide — never their brand drug names.
-- **No comparisons to existing drugs** anywhere.
-- **No clinical-trial outcome claims** on product pages or quiz results. Allowed only on `/blog` with educational disclaimer.
+- **No human-use language** anywhere in product, shop, quiz, or membership pages
+- **Generic peptide names only**: semaglutide, tirzepatide, liraglutide — never their brand drug names
+- **No comparisons to existing drugs** anywhere
+- **No clinical-trial outcome claims** on product pages, shop, quiz, or membership pages
+
+### Where clinical literature IS allowed
+Clinical and peer-reviewed literature can be cited (with educational disclaimers pinned) on:
+- `/blog` and `/blog/[slug]`
+- `/research` and `/research/[peptide]`
+- `/protocols` and `/protocols/[slug]`
+- `/docs/*` (internal reference documents)
+
+Even in these allowlisted areas, **outcome claims about the buyer/researcher** are still forbidden — only the published literature itself can be referenced.
 
 ### Forbidden phrases (enforce with a build-time linter)
 - *treats / cures / prevents / therapy / therapeutic / clinical-grade / prescription / prescribed*
 - *weight loss / muscle gain / anti-aging / for users / dosage for humans / human dose / humans should*
 - Drug brand names: *Ozempic, Wegovy, Trulicity, Saxenda, Mounjaro, Zepbound*, etc.
 
-### Allowlist for educational content
-Forbidden phrases ARE allowed in `/blog` and `/docs` because peer-reviewed citations use them in titles. The blog must keep the educational-only disclaimer pinned.
+These phrases ARE allowed in the routes listed above (because peer-reviewed citation titles often contain them). The linter must allowlist those source-tree paths.
 
 ### Disclaimers
 - **Quiz results**: "This is an informational resource only. We do not recommend peptides for any human use, condition, or outcome."
 - **AI assistant**: "The research assistant answers questions about chemistry, characterization, and product handling. It does not provide medical, dosing, or human-use guidance."
-- **Blog articles**: "Educational content — not product guidance."
+- **Blog articles, research pages, protocol pages**: "Educational content — not product guidance."
 - **All product pages**: full RUO disclaimer block above the fold.
 
 ### Refund / replacement
@@ -573,17 +526,17 @@ Defer until after launch:
 
 ## 15 · Tech preferences
 
+These are preferences, not mandates. Designer can override for good reason.
+
 - **Framework**: Next.js 16 (App Router) + TypeScript
 - **Styling**: Tailwind CSS v4 with a custom theme using the brand palette
 - **State**: Zustand for client state (cart, age-gate, account, quiz answers); persisted to localStorage
-- **UI primitives**: Radix UI for dialogs/accordions/tabs; shadcn-style component conventions
-- **Motion**: Framer Motion for entry/exit and ribbon-draw animations
+- **UI primitives**: Radix UI for dialogs/accordions/tabs
+- **Motion**: Framer Motion
 - **Icons**: Lucide
-- **Images**: `next/image` + Unsplash hot-links for editorial; vial mockups should be owned assets (3D rendered or photographed)
 - **Fonts**: Inter + Inter Tight via `next/font/google`
-- **Testing**: Lighthouse target Perf ≥ 90, A11y ≥ 95
-- **Compliance gate**: build-time `lint:ruo` script that greps source for forbidden phrases and fails the build if violations are found outside `/blog` and `/docs`
-- **Deployment**: Vercel (preview deployments on every PR)
+- **Compliance gate**: build-time `lint:ruo` script that greps source for forbidden phrases and fails the build if violations are found outside the allowlisted routes
+- **Deployment**: Vercel
 
 ---
 
@@ -598,28 +551,28 @@ The redesign is "done" when:
 
 ### Pages that exist
 - [ ] Home, Quiz, Quiz results
-- [ ] Research index + per-peptide education pages for every catalog peptide
-- [ ] Shop catalog + per-peptide product page (with vial mockup hero)
-- [ ] Protocols index + per-protocol detail + per-protocol subscribe configurator
+- [ ] Research index + per-peptide education pages for every catalog peptide (using locked design from 7.1)
+- [ ] Shop catalog + per-peptide product page
+- [ ] Protocols index + per-protocol detail + per-protocol subscribe configurator (using locked design from 7.2)
 - [ ] Membership landing + onboarding
-- [ ] COA library with row-click modal
-- [ ] Quality page covering all 12 sections from 8.7
+- [ ] COA library with row-click modal (using locked design from 7.3)
+- [ ] Quality page with all required content from 8.5
 - [ ] About, Blog, FAQ, Contact, Legal trio
 - [ ] Account dashboard with /protocols, /orders, /coas, /journal, /billing
 
-### Visual / UX
+### Brand
 - [ ] No gradients used anywhere
 - [ ] Single brand-color accent per section, max two per page
-- [ ] Peptide structure illustrations on every research page, every COA modal, optionally as decorative dividers
-- [ ] Vial mockup on every shop product page hero
+- [ ] Peptide structure illustrations on every research page and every COA modal
 - [ ] All sections respect light-mode primary; dark sections are accent only
+- [ ] Logo used correctly (black on light, white on dark, never colored)
 
 ### Compliance
 - [ ] 21+ age gate triggers on first visit, persists via cookie
 - [ ] RUO banner visible on every page
-- [ ] `lint:ruo` build-time check passes (forbidden phrases not present outside `/blog` + `/docs`)
+- [ ] `lint:ruo` build-time check passes (forbidden phrases not present outside allowlisted routes)
 - [ ] No drug brand names anywhere
-- [ ] No clinical-outcome claims on product / quiz / protocol / membership pages
+- [ ] No clinical-outcome claims on product / quiz / shop / membership pages
 - [ ] All disclaimers from section 13 are present where required
 
 ### Membership UX
@@ -642,4 +595,4 @@ The redesign is "done" when:
 
 ---
 
-*This brief is the source of truth. Anything that was in the v1 prototype but isn't reaffirmed here is discarded. Anything new must trace back to a section in this document.*
+*This brief is the source of truth. Brand, compliance, the three locked page designs (research / protocols / COA), and functional requirements are non-negotiable. Everything else is the designer's call — pull from the reference sites in section 5, with **superpower.com as the primary structural template**, and build something better than the v1 prototype.*

@@ -31,7 +31,10 @@ const FORBIDDEN = [
 
 const ALLOWLIST_DIRS = [
   join("src", "app", "blog"),
+  join("src", "app", "research"),
+  join("src", "app", "protocols"),
   join("src", "lib", "data", "blog.ts"),
+  join("src", "lib", "data", "protocols.ts"),
   "docs",
 ];
 
