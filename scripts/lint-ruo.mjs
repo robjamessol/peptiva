@@ -32,6 +32,7 @@ const FORBIDDEN = [
 const ALLOWLIST_DIRS = [
   join("src", "app", "blog"),
   join("src", "lib", "data", "blog.ts"),
+  "docs",
 ];
 
 const SKIP_DIRS = new Set([
@@ -68,6 +69,13 @@ function walk(dir) {
 }
 
 walk(SRC);
+const DOCS = join(ROOT, "docs");
+try {
+  statSync(DOCS);
+  // docs is intentionally allowlisted above; nothing to do here
+} catch {
+  /* docs may not exist yet */
+}
 
 if (problems.length > 0) {
   console.error("✖  RUO compliance check failed:\n");
