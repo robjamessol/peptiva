@@ -38,7 +38,7 @@ This is the single source of truth. It consolidates the original product require
 ### Today: Option 2 — Research Use Only (RUO)
 - Sell research peptides directly to researchers/labs/institutions.
 - Strict RUO compliance: no human-use, no medical, no therapeutic, no clinical-outcome language on any product, shop, quiz, protocol, or membership page.
-- Clinical literature is allowed **only** on `/blog` with an educational disclaimer.
+- Clinical literature is allowed **only** on `/blog or /research protocol` with an educational disclaimer.
 - 21+ age gate at the door, persistent.
 - AI evaluation of user goals → peptide-category recommendations only (legality-safe).
 
@@ -125,9 +125,8 @@ These illustrations appear on:
 
 ### Hard rules
 - **No gradients.** Solid color blocks, hairline strokes, monochrome illustrations.
-- One accent color per section, max two per page.
 - Light mode is primary. Dark sections are accent only (e.g., quality hero, membership upsell band).
-- Mostly white background with Midnight headings and Slate body.
+- Mostly white background
 
 ### Editorial / scientific feel
 - Closer to *elevenlabs.io*, *seed.com*, *sapgoodenergy.com* than *gnc.com*.
@@ -149,12 +148,11 @@ These illustrations appear on:
 
 | Site | Use as reference for |
 |---|---|
-| [elevenlabs.io](https://elevenlabs.io) | Overall aesthetic — dark/light contrast, type rhythm, scientific minimalism |
-| [seed.com/daily-multivitamin](https://seed.com/daily-multivitamin) | Long-form education-style page format → `/research/[peptide]` |
+https://superpower.com/ for design and fee very important
+| [elevenlabs.io](https://elevenlabs.io) | Overall aesthetic for product category and research pages — dark/light contrast, type rhythm, scientific minimalism |
 | [sapgoodenergy.com/products/case-with-10-sap](https://sapgoodenergy.com) | Three-column product page, sub-vs-once selector, dotted-divider value props |
 | [superpower.com](https://superpower.com) | Membership UX, perk presentation, single-tier conviction |
 | [ezpeps.com/coa-library](https://ezpeps.com/coa-library) | COA library table format (we'll add a row-click modal on top) |
-| [stripe.com](https://stripe.com) | Editorial-scientific developer/research voice |
 
 ---
 
@@ -162,7 +160,7 @@ These illustrations appear on:
 
 ```
 /                               Marketing landing
-                                Hero → Quiz CTA → Stacks teaser → Quality teaser → Membership teaser → Footer
+                                **reference https://superpower.com/ homepage - replace with peptide specific answers research, category page, membership etc.
 
 /quiz                           Standalone quiz funnel → membership
 /quiz/results                   Saved share-able results page (with /quiz/results/[id] for emailed links)
@@ -204,19 +202,7 @@ These illustrations appear on:
 
 ## 8 · Page-by-page direction
 
-### 8.1 Home (`/`)
 
-The home page is a funnel router, not a destination. Three cards above the fold, all leading to `/quiz`, `/membership`, or `/shop`.
-
-- **Hero** — single bold question or claim ("Research peptides, characterized.") + primary CTA "Find research peptides for your work" → `/quiz`. Solid Midnight or White block, single-color accent line. Optional small peptide-structure illustration to one side.
-- **Three-card row** — *Take the quiz* / *Browse stacks* / *Why peptriva*
-- **Featured stacks** (3 cards with vial mockups) → links to `/protocols/[slug]`
-- **Quality teaser strip** — 4 stat tiles (HPLC %, USP <797>, COA per batch, no bundling) with link to `/quality`
-- **Membership teaser** — single CTA, member-pricing math, link to `/membership`
-- **Blog teaser** — 3 latest articles
-- **Footer** — full link grid + RUO long-form disclaimer
-
-CTAs above the fold should drive **primarily to `/quiz`**, secondarily to `/shop`.
 
 ### 8.2 Quiz (`/quiz`)
 
